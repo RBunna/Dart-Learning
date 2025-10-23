@@ -1,0 +1,30 @@
+{
+  "quiz": {
+    "playerName": "Tester",
+    "id": "6cbc6f21-b031-11f0-8c88-ad3fa533b194"
+  },
+  "questions": [
+    {
+      "title": "Capital of France?",
+      "choices": ["Paris", "London", "Rome"],
+      "goodChoice": "Paris",
+      "POINT": 1
+    },
+    {
+      "title": "2 + 2 = ?",
+      "choices": ["2", "4", "5"],
+      "goodChoice": "4",
+      "POINT": 1
+    }
+  ],
+  "answers": [
+    {
+      "questionId": "6cbc4810-b031-11f0-8c88-ad3fa533b194",
+      "answerChoice": "Paris"
+    },
+    {
+      "questionId": "6cbc6f20-b031-11f0-8c88-ad3fa533b194",
+      "answerChoice": "4"
+    }
+  ]
+}
