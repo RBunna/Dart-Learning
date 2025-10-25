@@ -1,8 +1,5 @@
 {
-  "quiz": {
-    "playerName": "Tester",
-    "id": "6cbc6f21-b031-11f0-8c88-ad3fa533b194"
-  },
+  "quiz": { "id": "ea6c6901-b187-11f0-9e49-2f1a09bf7f18" },
   "questions": [
     {
       "title": "Capital of France?",
@@ -17,14 +14,70 @@
       "POINT": 1
     }
   ],
-  "answers": [
+  "players": [
     {
-      "questionId": "6cbc4810-b031-11f0-8c88-ad3fa533b194",
-      "answerChoice": "Paris"
+      "id": "ef5a9e00-b187-11f0-9e49-2f1a09bf7f18",
+      "name": "tester",
+      "answers": [
+        {
+          "id": "f1d8e470-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c41f0-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "Rome"
+        },
+        {
+          "id": "f32cb4a0-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c6900-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "4"
+        }
+      ]
     },
     {
-      "questionId": "6cbc6f20-b031-11f0-8c88-ad3fa533b194",
-      "answerChoice": "4"
+      "id": "f5f375c0-b187-11f0-9e49-2f1a09bf7f18",
+      "name": "Noob tester",
+      "answers": [
+        {
+          "id": "f9cdc9c0-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c41f0-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "Rome"
+        },
+        {
+          "id": "fa927950-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c6900-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "5"
+        }
+      ]
+    },
+    {
+      "id": "fd1812c0-b187-11f0-9e49-2f1a09bf7f18",
+      "name": "Pro tester",
+      "answers": [
+        {
+          "id": "feb743d0-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c41f0-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "Paris"
+        },
+        {
+          "id": "ffa24010-b187-11f0-9e49-2f1a09bf7f18",
+          "questionId": "ea6c6900-b187-11f0-9e49-2f1a09bf7f18",
+          "choice": "4"
+        }
+      ]
+    },
+    {
+      "id": "04d2ea60-b18a-11f0-a50a-5595424c6d24",
+      "name": "real player",
+      "answers": [
+        {
+          "id": "0950aa50-b18a-11f0-a50a-5595424c6d24",
+          "questionId": "face8600-b189-11f0-a50a-5595424c6d24",
+          "choice": "pariss"
+        },
+        {
+          "id": "0c17b990-b18a-11f0-a50a-5595424c6d24",
+          "questionId": "facead10-b189-11f0-a50a-5595424c6d24",
+          "choice": "45"
+        }
+      ]
     }
   ]
 }

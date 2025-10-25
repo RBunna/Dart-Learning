@@ -7,30 +7,38 @@ class QuizConsole {
   QuizConsole({required this.quiz});
 
   void startQuiz() {
-    List<Answer> answers = <Answer>[];
     print('--- Welcome to the Quiz ---');
 
-    String? name;
-    do {
+    while (true) {
+      String? name;
       stdout.write("\nYour name: ");
       name = stdin.readLineSync();
-    } while (!VALIDATE.USER_INPUT(name));
-    quiz.playerName = name;
 
-    for (var question in quiz.questions) {
-      print('Question: ${question.title} - ( ${question.POINT} points)');
-      print('Choices: ${question.choices}');
-      stdout.write('Your answer: ');
-      String? userInput = stdin.readLineSync();
+      if (!VALIDATE.USER_INPUT(name!)) break;
+      Player player = Player(name);
 
-      // Check for null input
-      if (VALIDATE.USER_INPUT(userInput!)) {
-        answers.add(Answer(questionId: question.id, answerChoice: userInput));
-      } else {
-        print('No answer entered. Skipping question.');
+      for (var question in quiz.questions) {
+        print('Question: ${question.title} - ( ${question.POINT} points)');
+        print('Choices: ${question.choices}');
+        stdout.write('Your answer: ');
+        String? userInput = stdin.readLineSync();
+
+        // Check for null input
+        if (VALIDATE.USER_INPUT(userInput!)) {
+          player.addAnswer(
+              Answer(questionId: question.id, answerChoice: userInput));
+        } else {
+          print('No answer entered. Skipping question.');
+        }
+
+        print('');
       }
+      quiz.addPlayer(player);
 
-      print('');
+      print(
+          '${name}, your score in percentage: ${player.getScoreInPercentage(quiz.questions)} %');
+      print(
+          '${name}, your score in points: ${player.getScoreInPoint(quiz.questions)}');
     }
 
     // ============= Code extracted from Stack overflow ===============
@@ -43,8 +51,11 @@ class QuizConsole {
     // ================================================================
 
     print('--- Quiz Finished ---');
-    print(
-        '${name}, your score in percentage: ${quiz.getScoreInPercentage(answers)} %');
-    print('${name}, your score in points: ${quiz.getScoreInPoint(answers)}');
+    for (Player player in quiz.players) {
+      print(
+          '→  ${player.name}, your score in percentage: ${player.getScoreInPercentage(quiz.questions)} %');
+      print(
+          '   ${player.name}, your score in points: ${player.getScoreInPoint(quiz.questions)}');
+    }
   }
 }

@@ -18,33 +18,33 @@ main() {
         goodChoice: "best",
         choices: ["best"],
         POINT: 100),
-  ], playerName: 'Demo');
+  ]);
   setUp(() {});
 
   test('My first test', () {
     // Do something
     
-    List<Answer> answers = <Answer>[];
-    answers.add(Answer(questionId: quiz.questions[0].id, answerChoice: '26'));
-    answers.add(
+    Player player = Player('First player');
+    player.addAnswer(Answer(questionId: quiz.questions[0].id, answerChoice: '26'));
+    player.addAnswer(
         Answer(questionId: quiz.questions[1].id, answerChoice: '181,035'));
-    answers.add(Answer(questionId: quiz.questions[2].id, answerChoice: 'best'));
+    player.addAnswer(Answer(questionId: quiz.questions[2].id, answerChoice: 'best'));
 
     // ✅ Expect: 100, Actual: 100
-    expect(quiz.getScoreInPercentage(answers), equals(100));
-    expect(quiz.getScoreInPoint(answers), equals(160));
+    expect(player.getScoreInPercentage(quiz.questions), equals(100));
+    expect(player.getScoreInPoint(quiz.questions), equals(160));
   });
 
   test('Test 2', () {
     // Do something
-    List<Answer> answers = <Answer>[];
-    answers.add(Answer(questionId: quiz.questions[0].id, answerChoice: '25'));
-    answers.add(
+    Player player = Player('Test 2');
+    player.addAnswer(Answer(questionId: quiz.questions[0].id, answerChoice: '25'));
+    player.addAnswer(
         Answer(questionId: quiz.questions[1].id, answerChoice: '181,035'));
-    answers.add(Answer(questionId: quiz.questions[2].id, answerChoice: 'best'));
+    player.addAnswer(Answer(questionId: quiz.questions[2].id, answerChoice: 'best'));
 
-    // ❌ Expect: 100, Actual: 66
-    expect(quiz.getScoreInPercentage(answers), equals(100));
-    expect(quiz.getScoreInPoint(answers), equals(150));
+    // ❌ Expect: 100, Actual: 93
+    expect(player.getScoreInPercentage(quiz.questions), equals(100));
+    expect(player.getScoreInPoint(quiz.questions), equals(150));
   });
 }

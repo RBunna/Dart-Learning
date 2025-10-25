@@ -17,11 +17,13 @@ class Question {
 }
 
 class Answer {
-  final String id = uuid.v1();
+  final String id;
   final String questionId;
   final String answerChoice;
 
-  Answer({required this.questionId, required this.answerChoice});
+  Answer({required this.questionId, required this.answerChoice})
+      : id = uuid.v1();
+  Answer.load(this.id, this.questionId, this.answerChoice);
 
   int getPoint(Question question) =>
       (this.answerChoice == question.goodChoice) ? question.POINT : 0;
@@ -29,24 +31,40 @@ class Answer {
 
 class Quiz {
   final String id;
-  String? playerName;
   final List<Question> questions;
-  final List<Answer> submitAnswers;
+  List<Player> players;
 
-  Quiz({required this.questions, this.playerName}) : id = uuid.v1(), submitAnswers = [];
-  Quiz.id({required this.questions, this.playerName, required this.id, required this.submitAnswers});
+  Quiz({required this.questions})
+      : id = uuid.v1(),
+        players = <Player>[];
+  Quiz.load(this.id, this.questions, this.players);
 
-  // void addAnswer(Answer answer) {
-  //   this.answers.add(answer);
-  // }
+  void addPlayer(Player player) {
+    this.players.add(player);
+  }
+}
 
-  int getScoreInPercentage(List<Answer> answers) => ((this
-                  .getScoreInPoint(answers) /
+class Player {
+  String id;
+  String name;
+  List<Answer> answers;
+
+  Player(this.name)
+      : id = uuid.v1(),
+        answers = <Answer>[];
+  Player.load(this.id, this.name, this.answers);
+
+  void addAnswer(Answer answer) {
+    this.answers.add(answer);
+  }
+
+  int getScoreInPercentage(List<Question> questions) => ((this
+                  .getScoreInPoint(questions) /
               questions.fold(0, (total, question) => total + question.POINT)) *
           100)
       .toInt();
 
-  int getScoreInPoint(List<Answer> answers) {
+  int getScoreInPoint(List<Question> questions) {
     Map<String, Question> questionsMap = {
       for (Question q in questions) q.id: q
     };

@@ -12,11 +12,18 @@ class QuizRepository {
     final data = jsonDecode(content);
     // Map JSON to domain objects
     var quiz = data['quiz'];
-    var answersJson = data['answers'] as List;
-    var answers = answersJson.map((a) {
-      return Answer(
-          questionId: a['questionId'], answerChoice: a['answerChoice']);
+
+    var playersJson = data['players'] as List;
+    var players = playersJson.map((player) {
+      var answersJson = player['answers'] as List;
+      var answers = answersJson.map((answer) {
+        return Answer.load(
+            answer['id'], answer['questionId'], answer['choice']);
+      }).toList();
+
+      return Player.load(player['id'], player['name'], answers);
     }).toList();
+
     var questionsJson = data['questions'] as List;
     var questions = questionsJson.map((q) {
       return Question(
@@ -26,19 +33,19 @@ class QuizRepository {
         POINT: q['POINT'],
       );
     }).toList();
-    if (answers == null)
-    return Quiz(questions: questions);
+
+    if (players.isEmpty)
+      return Quiz(questions: questions);
     else
-    return Quiz.id(questions: questions, id: quiz.id, playerName: quiz.playerName, submitAnswers: answers);
+      return Quiz.load(quiz['id'], questions, players);
   }
 
-  void writeQuiz(Quiz quiz, {List<Answer>? answers}) {
+  void writeQuiz(Quiz quiz) {
     try {
       final file = File(filePath);
 
       final data = {
         'quiz': {
-          'playerName': quiz.playerName,
           'id': quiz.id,
         },
         'questions': quiz.questions.map((q) {
@@ -49,19 +56,19 @@ class QuizRepository {
             'POINT': q.POINT,
           };
         }).toList(),
-        'answers': (answers == null)
-            ? quiz.submitAnswers.map((a) {
-                return {
-                  'questionId': a.questionId,
-                  'answerChoice': a.answerChoice,
-                };
-              }).toList()
-            : answers.map((answer) {
-                return {
-                  'questionId': answer.questionId,
-                  'answerChoice': answer.answerChoice
-                };
-              }).toList(),
+        'players': quiz.players.map((player) {
+          return {
+            'id': player.id,
+            'name': player.name,
+            'answers': player.answers.map((answer) {
+              return {
+                'id': answer.id,
+                'questionId': answer.questionId,
+                'choice': answer.answerChoice
+              };
+            }).toList()
+          };
+        }).toList(),
       };
 
       file.writeAsStringSync(jsonEncode(data));

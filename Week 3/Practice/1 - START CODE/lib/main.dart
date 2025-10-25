@@ -4,6 +4,17 @@ import 'domain/quiz.dart';
 import 'ui/quiz_console.dart';
 
 void main() {
+  const PATH = './lib/data/data.json';
+  Quiz quiz = loadFile(PATH);
+
+  QuizConsole console = QuizConsole(quiz: quiz);
+
+  console.startQuiz();
+
+  saveToFile(quiz: quiz, path: PATH);
+}
+
+Quiz loadStatic() {
   List<Question> questions = [
     Question(
         title: "Capital of France?",
@@ -12,14 +23,13 @@ void main() {
     Question(title: "2 + 2 = ?", choices: ["2", "4", "5"], goodChoice: "4"),
   ];
 
-  Quiz quiz = Quiz(questions: questions, playerName: 'Tester');
-  QuizConsole console = QuizConsole(quiz: quiz);
-  List<Answer> mockAnswers = [
-    Answer(questionId: questions[0].id, answerChoice: 'Paris'),
-    Answer(questionId: questions[1].id, answerChoice: '4'),
-  ];
+  return Quiz(questions: questions);
+}
 
-  QuizRepository('./lib/data/data.json').writeQuiz(quiz, answers: mockAnswers);
+Quiz loadFile(String path) {
+  return QuizRepository(path).readQuiz();
+}
 
-  console.startQuiz();
+void saveToFile({required Quiz quiz, required String path}) {
+  QuizRepository(path).writeQuiz(quiz);
 }
