@@ -1,8 +1,5 @@
-import 'package:first_flutter/learnings/week4.dart';
-import 'package:flutter/material.dart';
+import 'package:first_flutter/learnings/week7_theory.dart';
 
 void main() {
-  runApp(
-    Week4App.ex1()
-  );
+  Week7Theory().main();
 }
