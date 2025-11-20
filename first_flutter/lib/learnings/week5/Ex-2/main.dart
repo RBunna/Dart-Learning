@@ -24,14 +24,14 @@ class MyApp extends StatelessWidget {
               label: "Time",
               icon: Icons.access_time_sharp,
               type: ButtonType.secondary,
-              iconPosition: IconPosition.textFirst,
+              iconPosition: IconPosition.end,
             ),
             SizedBox(height: 10),
             CustomButton(
               label: "Account",
               icon: Icons.account_tree,
               type: ButtonType.disabled,
-              iconPosition: IconPosition.textFirst,
+              iconPosition: IconPosition.end,
             ),
           ],
         ),
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
 
 enum ButtonType { primary, secondary, disabled }
 
-enum IconPosition { iconFirst, textFirst }
+enum IconPosition { beginning, end }
 
 class CustomButton extends StatelessWidget {
   final String label;
@@ -55,7 +55,7 @@ class CustomButton extends StatelessWidget {
     required this.label,
     required this.icon,
     this.type = ButtonType.primary,
-    this.iconPosition = IconPosition.iconFirst,
+    this.iconPosition = IconPosition.beginning,
   });
 
   Color get color {
@@ -99,7 +99,7 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: iconPosition == IconPosition.iconFirst
+          children: iconPosition == IconPosition.beginning
               ? content
               : content.reversed.toList(),
         ),

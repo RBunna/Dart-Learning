@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+class Ex4 {
+  void main() {
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
                       weatherStatus: weather.weatherStatus,
                     ),
                   )
-                  .toList(), 
+                  .toList(),
             ),
           ),
         ),
@@ -78,13 +80,13 @@ class WeatherCard extends StatelessWidget {
   AssetImage getWeatherImage() {
     switch (weatherStatus) {
       case WeatherStatus.cloudy:
-        return const AssetImage('cloudy.png'); 
+        return const AssetImage('assets/ex4/cloudy.png');
       case WeatherStatus.sunny:
-        return const AssetImage('sunny.png'); 
+        return const AssetImage('assets/ex4/sunny.png');
       case WeatherStatus.sunnyCloud:
-        return const AssetImage('sunnyCloud.png'); 
+        return const AssetImage('assets/ex4/sunnyCloud.png');
       case WeatherStatus.veryCloudy:
-        return const AssetImage('veryCloudy.png'); 
+        return const AssetImage('assets/ex4/veryCloudy.png');
     }
   }
 
