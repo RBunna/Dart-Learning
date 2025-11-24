@@ -1,8 +1,8 @@
-import 'package:first_flutter/learnings/week7/EX-1/ex_1.dart';
-import 'package:first_flutter/learnings/week7/EX-2/ex_2_step_1_start.dart';
-import 'package:first_flutter/learnings/week7/EX-3/ex_3_start.dart';
-import 'package:first_flutter/learnings/week7/EX-4/ex_4.dart';
+// import 'package:first_flutter/learnings/week8/EXERCISE-1/ex_1_start.dart';
+// import 'package:first_flutter/learnings/week8/EXERCISE-2/main.dart';
+// import 'package:first_flutter/learnings/week8/EXERCISE-3/main.dart';
+import 'package:first_flutter/learnings/week8/EXERCISE-4/main.dart';
 
 void main() {
-  Week7Ex4().main();
+  Week8Ex4().main();
 }

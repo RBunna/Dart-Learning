@@ -9,8 +9,7 @@ class Week7Ex4 {
         body: Expanded(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: ListView(
               children: [
                 ScoreCard(title: 'My score in Flutter'),
                 ScoreCard(title: 'My score in Dart'),
@@ -47,6 +46,7 @@ class _ScoreCardState extends State<ScoreCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
