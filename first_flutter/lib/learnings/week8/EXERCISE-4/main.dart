@@ -28,6 +28,10 @@ class JokeContainer extends StatefulWidget {
 class _JokeContainerState extends State<JokeContainer> {
   int? favoriteJokeIndex;
 
+  void changeFavoriteJoke(int? index) => setState(() {
+          favoriteJokeIndex = (favoriteJokeIndex == index) ? null : index;
+        });
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -35,9 +39,7 @@ class _JokeContainerState extends State<JokeContainer> {
       itemBuilder: (context, index) => FavoriteCard(
         isFavorite: favoriteJokeIndex == index,
         joke: jokes.elementAt(index),
-        onFavoriteClick: () => setState(() {
-          favoriteJokeIndex = index;
-        }),
+        onFavoriteClick: () => {changeFavoriteJoke(index)},
       ),
     );
   }
