@@ -29,8 +29,8 @@ class _JokeContainerState extends State<JokeContainer> {
   int? favoriteJokeIndex;
 
   void changeFavoriteJoke(int? index) => setState(() {
-          favoriteJokeIndex = (favoriteJokeIndex == index) ? null : index;
-        });
+    favoriteJokeIndex = (favoriteJokeIndex == index) ? null : index;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class FavoriteCard extends StatelessWidget {
   final VoidCallback onFavoriteClick;
   final bool _isFavorite;
   final Joke joke;
-  
+
   const FavoriteCard({
     super.key,
     required this.joke,
