@@ -23,18 +23,24 @@ class _StartScreenState extends State<StartScreen> {
     return Column(
       children: [
         const QuizTitle('Quiz App by not Ronan!'),
-        Spacer(flex: 3),
-        TextField(controller: _nameController),
-        QuizButton(
-          'Start Quiz',
-          onPress: () {
-            if (_nameController.value.text.isNotEmpty) {
-              widget.onStartPress(_nameController.value.text);
-              _nameController.clear();
-            }
-          },
-        ),
-        Spacer(flex: 4),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: [
+              TextField(controller: _nameController),
+              QuizButton(
+                'Start Quiz',
+                onPress: () {
+                  if (_nameController.value.text.isNotEmpty) {
+                    widget.onStartPress(_nameController.value.text);
+                    _nameController.clear();
+                  }
+                },
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
