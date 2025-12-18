@@ -17,7 +17,7 @@ class NewItem extends StatefulWidget {
 
 class _NewItemState extends State<NewItem> {
   // Default settings
-  static const defautName = "New grocery";
+  static const defaultName = "New grocery";
   static const defaultQuantity = 1;
   static const defaultCategory = GroceryCategory.fruit;
 
@@ -30,8 +30,8 @@ class _NewItemState extends State<NewItem> {
   void initState() {
     super.initState();
 
-    // Initialize intputs with default settings
-    _nameController.text = defautName;
+    // Initialize inputs with default settings
+    _nameController.text = defaultName;
     _quantityController.text = defaultQuantity.toString();
   }
 
@@ -39,17 +39,45 @@ class _NewItemState extends State<NewItem> {
   void dispose() {
     super.dispose();
 
-    // Dispose the controlers
+    // Dispose the controllers
     _nameController.dispose();
     _quantityController.dispose();
   }
 
-  void onReset() {
-    // Will be implemented later - Reset all fields to the initial values
+  void onReset() async {
+    // Reset all fields to the initial values
+    if (_nameController.text != defaultName ||
+        _quantityController.text != defaultQuantity.toString() ||
+        _selectedCategory != defaultCategory) {
+      bool? isReset = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Discard text?'),
+          content: const Text('You\'ll lose any changes you\'ve made.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Discard'),
+            ),
+          ],
+        ),
+        barrierDismissible: false,
+      );
+
+      if (isReset != null && isReset) {
+        _nameController.text = defaultName;
+        _quantityController.text = defaultQuantity.toString();
+        _selectedCategory = defaultCategory;
+      }
+    }
   }
 
   void onAdd() {
-    // Will be implemented later - Create and return the new grocery
+    // Create and return the new grocery
     String name = _nameController.text;
     int? quantity = int.tryParse(_quantityController.text);
 
@@ -108,9 +136,7 @@ class _NewItemState extends State<NewItem> {
                     ),
                     inputFormatters: <TextInputFormatter>[
                       // This website has a very good explanation of regular expression: https://regex101.com/
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d+'),
-                      ),
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
                     ],
                     // ========================================================
                   ),
